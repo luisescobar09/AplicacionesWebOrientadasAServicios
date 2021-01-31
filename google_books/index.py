@@ -2,7 +2,7 @@ import web
 import requests
 import json
 
-render = web.template.render("mvc/")
+render = web.template.render("google_books/")
 
 class Index():
 
