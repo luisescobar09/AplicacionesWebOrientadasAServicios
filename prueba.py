@@ -1,7 +1,8 @@
 import requests
 import json
-
-api =('https://api.football-data.org/v2/competitions/PL/matches')
+liga = input("Ingresa Liga: ")
+jornada = int(input("Ingresa jornada: "))
+api =('https://api.football-data.org/v2/competitions/'+liga+'/matches')
 headers = { 'X-Auth-Token': '7a3b0df07f7a4c949dfe74e24f679d79', 'Accept-Encoding': '' }
 
 result = requests.get(api, headers=headers)
@@ -26,33 +27,35 @@ print(len(decoded))
 print(fecha)
 print(str(today) < fecha)'''
 
-partidos=[]
+partidos=[] 
+
 for i in decoded:
-  jornada= i["matchday"]
-  partido = i["homeTeam"]["name"]+" VS "+i["awayTeam"]["name"]
-  fecha = i["utcDate"]
-  resultado_loc = str(i["score"]["fullTime"]["homeTeam"]) 
-  resultado_vis = str(i["score"]["fullTime"]["awayTeam"])
-  marcador = "Marcador: "+str(i["score"]["fullTime"]["homeTeam"])+"-"+str(i["score"]["fullTime"]["awayTeam"])
-
-  datos = {
-  "matchday": jornada,
-  "partido": partido,
-  "fecha" : fecha,
-  "marcador" : marcador
-  }
-  partidos.append(datos)
-for j in partidos:
-  if j["matchday"] == 23:
-    fecha = "Fecha: "+str(j["fecha"]).replace("T"," ").replace("Z","")+" UTC"
-    print(fecha)
-    print(str(j["matchday"])+".- "+str(j["partido"]))
-
-    if j["marcador"].count("None") == 2:
+  if i["matchday"] == jornada:
+    partido = i["homeTeam"]["name"]+" VS "+i["awayTeam"]["name"]
+    fecha = "Fecha "+i["utcDate"].replace("T"," ").replace("Z","")+" UTC"
+    marcador = "Marcador: "+str(i["score"]["fullTime"]["homeTeam"])+"-"+str(i["score"]["fullTime"]["awayTeam"])    
+    if marcador.count("None") == 2:
       marcador = "Por disputarse"
-      print(marcador)
     else:
-      print(j["marcador"])
+      marcador
+
+    datos = {
+      "matchday": jornada,
+      "partido": partido,
+      "fecha" : fecha,
+      "marcador" : marcador
+      }
+    partidos.append(datos)
+    #print(partidos)
+
+
+for j in partidos:
+  fecha = j["fecha"]
+  print(fecha)
+  game = j["partido"]
+  print(game)
+  marcador = j["marcador"]
+  print(marcador)
 
 
 

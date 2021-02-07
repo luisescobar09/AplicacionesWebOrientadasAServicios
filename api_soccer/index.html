@@ -1,0 +1,79 @@
+$def with (partidos)
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Resultados de fútbol</title>
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	 crossorigin="anonymous">
+	<link rel="icon" href="https://dbdzm869oupei.cloudfront.net/img/sticker/preview/10855.png" type="image/png" />
+</head>
+
+<body>
+
+	<div class="container bg-light ">
+		<div class="row justify-content-center mt-4 pt-4">
+			<div class="col-md-8 ">
+				<h1 class="display-4 text-center fw-bold">¡Encuentra los resultados de las 5 grandes ligas en Europa aquí!</h1>
+				<hr class="bg-success">
+				<br></br>
+				<!--- formulario -->
+        <form method="POST">
+            <label class="h1" for="autoSizingSelect">Selecciona tu liga favorita:</label> <br>
+            <small id="ayuda" class="form-text font-weight-bold text-danger">* Campos obligatorios.</small>
+            
+            <div class="row form-group"><label for="nombre" class="col-form-label col-md-4 h1"></label>
+              <div class="col-md-5">
+                <select class="form-select text-center h3" id="liga" name="liga" required>
+                <option value="PL" class="text-center h5">Premier League</option>
+                <option value="PD" class="text-center h5">LaLiga</option>
+                <option value="BL1" class="text-center h5">Bundesliga</option>
+                <option value="SA" class="text-center h5">Serie A</option>
+                <option value="FL1" class="text-center h5">Ligue 1</option>
+              </select>
+            </div>
+            </div>
+          <label for="nombre" class="col-form-label col-md-6 h1"></label>
+        <button type="button" onclick="jornadas()" class="btn btn-primary btn-lg my-4 float-center">Buscar</button> <br><br>
+            <div id="insertar">
+            </div>
+          <label for="nombre" class="col-form-label col-md-5 h1"></label>
+        </form> <br> <br>
+      <script >
+            function jornadas(){
+      document.getElementById("insertar").innerHTML = "          <label class='h1' for='autoSizingSelect' id='week'>Elige jornada:</label> <br> <div class='row form-group'><label for='nombre' class='col-form-label col-md-4 h1'></label> <div class='col-md-5'> <select class='form-select text-center h3' id='jorna' name='jorna' required> </select> </div> </div> <label for='nombre' class='col-form-label col-md-5 h1'></label> <button type='submit' class='btn btn-success btn-lg my-4 float-center'>Ver resultados</button>"
+      var liga = document.getElementById("liga").value;
+      var valor = document.getElementById("jorna");
+      var jornada ="Jornada ";
+      if (liga == "PL" || liga == "PD" || liga == "SA" || liga == "FL1") {
+
+        for (var i=0; i<38; i++) { 
+          valor.options[i] = new Option (jornada[i]);
+          valor.options[i].value = i+1;
+          valor.options[i].text = jornada+(i+1); 
+        } 
+      }
+      else {
+        for (var j=0; j<34; j++) { 
+            valor.options[j] = new Option (jornada[j]);
+            valor.options[j].value = j+1;
+            valor.options[j].text = jornada+(j+1); 
+        }
+      }
+    }
+       </script>
+  <div class="text-center">
+          $if partidos != None:   
+            $for j in partidos:
+              <h3 class="text-danger">$j["partido"]</h3> 
+              <h4>$j["fecha"]</h4>
+              <h4>$j["marcador"]</h4> <br>
+        </div> <br>
+        </div>
+      </div> 
+    </div><br> <br>
+    </body>
+</html>
