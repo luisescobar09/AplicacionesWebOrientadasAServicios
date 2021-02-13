@@ -1,0 +1,79 @@
+$def with(datos)
+<!DOCTYPE html>
+<html lang=es>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Horoscopos</title>
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	 crossorigin="anonymous">
+	<link rel="icon" href="https://claveastral.com/wp-content/uploads/2020/04/circle-cropped-3-1.png" type="image/png" />
+</head>
+
+<body>
+	<br>
+    <div class="container bg-light ">
+		<div class="row justify-content-center mt-4 pt-4">
+			<div class="col-md-7 ">
+				<h1 class="display-4 text-center fw-bold">Encuentra información sobre tu signo zodiacal:</h1>
+				<hr class="bg-success">
+        <br></br>
+				<!--- formulario -->
+        <form method="POST">
+					<div class="row form-group">
+            <label for="nombre" class="col-form-label col-md-1 h1"></label>
+						<label for="nombre" class="col-form-label col-md-4 h1">Ingresa tu fecha de nacimiento:</label>
+            <div class="col-md-6">
+              <div class="form-group row">
+
+                <div class="col-md-9">
+                    <input class="form-control" type="date" value="" name="nacimiento" id="nacimiento" max="" required>
+                </div>
+        <label for="nombre" class="col-form-label col-md-4 h1"></label>
+        <button type="submit" class="btn btn-success btn-lg my-4 float-center">Ver resultado</button>            
+            </div>
+          </div>          
+        </form>
+        <br><br> 
+        $if datos != None:
+          <div class="text-center"><br><br>
+          <h1 class="text-danger">$:datos["nombre"]</h1> <br>
+          <p>
+          <b class="text-primary h2">Fecha: </b><span class="h3">$:datos["fecha"]</span></p>
+          <p>
+          $:datos["logo"] <br>
+          <p>
+          <b class="text-danger h3">Elemento: </b><span class="h4">$:datos["elemento"]</span></p>
+          <p>
+          <b class="text-primary h3">Color: </b><span class="h4">$:datos["color"]</span></p>
+
+          <p>
+          <b class="text-danger h3">Números de la suerte: </b><span class="h4">$:datos["numeros"]</span></p>
+
+          <p>
+          <b class="text-primary h3">Horoscopo del dia: </b><span class="h4">$:datos["horoscopo"]</span></p><br>
+          </div>
+        </div> 
+      </div>
+    </div> <br> <br>
+
+
+
+        <script>
+window.onload = function(){
+  var fecha = new Date(); //Fecha actual
+  var mes = fecha.getMonth()+1; //obteniendo mes
+  var dia = fecha.getDate(); //obteniendo dia
+  var ano = fecha.getFullYear(); //obteniendo año
+  if(dia<10)
+    dia='0'+dia; //agrega cero si el menor de 10
+  if(mes<10)
+    mes='0'+mes //agrega cero si el menor de 10
+  document.getElementById('nacimiento').value=ano+"-"+mes+"-"+dia;
+  document.getElementById('nacimiento').max=ano+"-"+mes+"-"+dia;
+}
+        </script>
+  </body>
+</html>

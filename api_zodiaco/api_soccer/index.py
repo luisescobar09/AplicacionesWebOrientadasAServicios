@@ -3,7 +3,6 @@ import requests
 import json
 
 render = web.template.render("api_soccer/")
-
 class Index():
 
   def GET(self):
